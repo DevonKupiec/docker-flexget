@@ -27,6 +27,8 @@ RUN \
 		boost-system \
 		libgcc \
 		libstdc++ \
+		curl \
+		bash \
 		openssl && \
 	apk add --no-cache --virtual=build-deps \
 		autoconf \

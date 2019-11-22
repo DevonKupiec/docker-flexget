@@ -3,7 +3,7 @@ MAINTAINER wiserain
 
 RUN \
 	echo "**** install frolvlad/alpine-python3 ****" && \
-	apk add --no-cache python3 && \
+	apk add --no-cache python3 bash curl && \
 	python3 -m ensurepip && \
 	rm -r /usr/lib/python*/ensurepip && \
 	pip3 install --upgrade pip setuptools && \

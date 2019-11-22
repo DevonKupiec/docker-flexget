@@ -1,38 +1,44 @@
 FROM alpine:3.10
-MAINTAINER wiserain
 
-RUN \
-	echo "**** install frolvlad/alpine-python3 ****" && \
-	apk add --no-cache python3 bash curl && \
+# install base packages
+RUN	apk add --no-cache \
+		bash \
+		curl \
+		python3 \
+		py3-cryptography \
+		shadow \
+		tzdata && \
 	python3 -m ensurepip && \
 	rm -r /usr/lib/python*/ensurepip && \
 	pip3 install --upgrade pip setuptools && \
 	if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
 	if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-	echo "**** install plugin: telegram ****" && \
-	apk add --no-cache py3-cryptography && \
-	pip install --upgrade python-telegram-bot && \
-	echo "**** install plugins: cfscraper ****" && \
-	apk add --no-cache --virtual=build-deps g++ gcc python3-dev libffi-dev openssl-dev && \
-	pip install --upgrade cloudscraper && \
-	apk del --purge --no-cache build-deps && \
-	echo "**** install plugins: convert_magnet ****" && \
-	apk add --no-cache boost-python3 libstdc++ && \
-	echo "**** install plugin: misc ****" && \
-	pip install --upgrade \
-		transmissionrpc \
+	sed -i 's/^CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/' /etc/default/useradd
+
+# install build dependencies with pip packages
+RUN	apk add --no-cache --virtual=build-deps \
+		boost-python3 \
+		g++ \
+		gcc \
+		libffi-dev \
+		libstdc++ \
+		openssl-dev \
+		python3-dev \
+		py3-cryptography && \
+	pip install --upgrade --no-cache-dir \
+		cloudscraper \
+		cryptography \
 		deluge_client \
-		irc_bot && \
-	echo "**** install flexget ****" && \
-	pip install --upgrade --force-reinstall \
-		flexget && \
-	echo "**** system configurations ****" && \
-	apk --no-cache add shadow tzdata && \
-	sed -i 's/^CREATE_MAIL_SPOOL=yes/CREATE_MAIL_SPOOL=no/' /etc/default/useradd && \
-	echo "**** cleanup ****" && \
+		irc_bot \
+		python-telegram-bot \
+		transmissionrpc && \
+	apk del --purge --no-cache build-deps  && \
 	rm -rf \
 		/tmp/* \
 		/root/.cache
+
+# Install/update flexget
+RUN	pip install --upgrade --force-reinstall --no-cache-dir flexget
 
 # copy local files
 COPY files/ /

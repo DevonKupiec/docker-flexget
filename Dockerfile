@@ -20,8 +20,13 @@ RUN	apk add --no-cache --virtual=build-deps \
 		boost-python3 \
 		g++ \
 		gcc \
+		libc-dev \
 		libffi-dev \
 		libstdc++ \
+		libxslt \
+		libxslt-dev \
+		libxml2 \
+		libxml2-dev \
 		openssl-dev \
 		python3-dev \
 		py3-cryptography && \

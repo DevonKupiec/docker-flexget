@@ -30,6 +30,7 @@ RUN	apk add --no-cache --virtual=build-deps \
 		cryptography \
 		deluge_client \
 		irc_bot \
+		pysocks \
 		python-telegram-bot \
 		transmissionrpc && \
 	apk del --purge --no-cache build-deps  && \

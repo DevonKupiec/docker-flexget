@@ -33,7 +33,7 @@ RUN	apk add --no-cache --virtual=build-deps \
 	pip install --upgrade --no-cache-dir \
 		cloudscraper \
 		cryptography \
-		deluge_client \
+		deluge-client \
 		irc_bot \
 		pysocks \
 		python-telegram-bot \

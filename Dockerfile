@@ -20,15 +20,18 @@ RUN	apk add --no-cache --virtual=build-deps \
 		boost-python3 \
 		g++ \
 		gcc \
+		jpeg-dev \
 		libc-dev \
 		libffi-dev \
 		libstdc++ \
-		libxslt \
 		libxslt-dev \
-		libxml2 \
 		libxml2-dev \
 		openssl-dev \
-		python3-dev \
+		python3-dev && \
+	apk add --no-cache \
+		jpeg \
+		libxslt \
+		libxml2 \
 		py3-cryptography && \
 	pip install --upgrade --no-cache-dir \
 		cloudscraper \

@@ -27,7 +27,8 @@ RUN	apk add --no-cache --virtual=build-deps \
 		libxslt-dev \
 		libxml2-dev \
 		openssl-dev \
-		python3-dev && \
+		python3-dev \
+		zlib-dev && \
 	apk add --no-cache \
 		jpeg \
 		libxslt \
@@ -41,13 +42,15 @@ RUN	apk add --no-cache --virtual=build-deps \
 		pysocks \
 		python-telegram-bot \
 		transmissionrpc && \
+	# Install/update flexget
+	pip install --upgrade --force-reinstall --no-cache-dir \
+		flexget && \
+	# Cleanup
 	apk del --purge --no-cache build-deps  && \
 	rm -rf \
 		/tmp/* \
 		/root/.cache
 
-# Install/update flexget
-RUN	pip install --upgrade --force-reinstall --no-cache-dir flexget
 
 # copy local files
 COPY files/ /

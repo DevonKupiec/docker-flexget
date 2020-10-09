@@ -38,9 +38,7 @@ RUN	apk add --no-cache --virtual=build-deps \
 		cloudscraper \
 		cryptography \
 		deluge-client \
-		irc_bot \
 		pysocks \
-		python-telegram-bot \
 		transmissionrpc && \
 	# Install/update flexget
 	pip install --upgrade --force-reinstall --no-cache-dir \

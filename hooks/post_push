@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function add_tag() {
-  docker tag $IMAGE_NAME $DOCKER_REPO:$1
-  docker push $DOCKER_REPO:$1
+  docker tag $IMAGE_NAME $DOCKER_REPO
+  docker push $DOCKER_REPO
 }
 
 CID=$(docker run -d $IMAGE_NAME)

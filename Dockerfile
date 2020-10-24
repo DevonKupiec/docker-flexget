@@ -39,6 +39,7 @@ RUN	apk add --no-cache --virtual=build-deps \
 		cryptography \
 		deluge-client \
 		pysocks \
+		python-telegram-bot==12.8 \
 		transmissionrpc && \
 	# Install/update flexget
 	pip install --upgrade --force-reinstall --no-cache-dir \

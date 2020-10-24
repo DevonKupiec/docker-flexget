@@ -10,6 +10,12 @@ sleep 10s
 FG_VERSION=$(docker exec $CID flexget -V | sed -n 1p)
 docker rm -f $CID
 
+echo $CID
+echo $FG_Version
+echo $DOCKER_TAG
+echo $DOCKER_REPO
+echo $IMAGE_NAME
+
 add_tag $DOCKER_TAG
 add_tag $FG_VERSION
 
